@@ -1,15 +1,40 @@
-import { ApolloServer } from 'apollo-server';
+import "dotenv/config";
+import { createConnection } from "typeorm";
+import { ApolloServer } from "apollo-server-express";
+import * as express from "express";
+import * as session from "express-session";
+import { typeDefs } from "./typeDefs";
 import resolvers from './resolvers';
-import typeDefs from './schemas';
+// import typeDefs from './schemas';
 
-const server = new ApolloServer({ resolvers, typeDefs })
+const startServer = async () => {
+  const server = new ApolloServer({
+    resolvers, typeDefs,
+    context: ({req, res}: any) => ({req, res})
+  })
+  await createConnection();
 
-server.listen()
-  .then( ({ url }) => console.log(`server is ready at ${url}`) )
+  const app = express();
 
+  app.use(
+    session({
+      secret: "asdfasdf",
+      resave: false,
+      saveUninitialized: false
+    })
+  )
 
-// Hot Module Replacement
-if (module.hot) {
-    module.hot.accept();
-    module.hot.dispose(() => console.log('Module disposed. '));
+  server.applyMiddleware({
+    app,
+    cors: {
+      credentials: true,
+      origin: "http://localhost:3000"
+    }
+  });
+
+  app.listen({port: 4000 }, () =>{
+    console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+  })
 }
+
+startServer()

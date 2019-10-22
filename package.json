@@ -1,28 +1,37 @@
 {
-  "name": "contra-node",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack --config webpack.$NODE_ENV.js",
-    "start": "node dist/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "apollo-server": "^2.9.6",
-    "graphql": "^14.5.8"
-  },
-  "devDependencies": {
-    "@types/webpack-env": "^1.14.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "ts-loader": "^6.2.0",
-    "typescript": "^3.6.4",
-    "webpack": "^4.41.1",
-    "webpack-cli": "^3.3.9",
-    "webpack-merge": "^4.2.2",
-    "webpack-node-externals": "^1.7.2"
-  }
+   "name": "contra-node",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "build": "webpack --config webpack.$NODE_ENV.js",
+      "start": "nodemon --exec ts-node src/index.ts",
+      "start_old": "node dist/server",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "apollo-server-express": "^2.9.6",
+      "bcryptjs": "^2.4.3",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "express-session": "^1.17.0",
+      "graphql": "^14.5.8",
+      "pg": "^7.12.1",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.20",
+      "mysql": "^2.14.1"
+   },
+   "devDependencies": {
+      "@types/bcryptjs": "^2.4.2",
+      "@types/express": "^4.17.1",
+      "@types/express-session": "^1.15.15",
+      "@types/graphql": "^14.5.0",
+      "@types/node": "^8.0.29",
+      "ts-loader": "^6.2.0",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   }
 }
